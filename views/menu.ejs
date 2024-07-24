@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= restaurant.name %></title>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+  <h1>Full Menu</h1>
+
+  <% for( let index = 0; index < category.length; index++ ) { %>
+    <h2><%= category[index] %></h2>
+    <% menu.forEach((item, idx) => { %>
+        <% if (category[index] === item.category) { %>
+            <li>
+                <%= item.id %> : <%= item.name %>
+                <ul>
+                    
+                    <p>price: <%= item.price %></p>
+                    <p>rating: <%= item.rating %></p>
+                    <p>category: <%= item.category %></p>
+                    <p>details: <%= item.details %></p>
+            
+                </ul> 
+            </li>
+        <% } %>
+    <% }) %>
+  <% } %>
+
+</body>
+</html>
+
+
