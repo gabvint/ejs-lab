@@ -66,23 +66,23 @@ app.get('/', (req, res) => {
 });
 
 app.get('/menu', (req, res) => {
-  
 
   res.render('menu.ejs', {
     restaurant: RESTAURANT,
     menu: RESTAURANT.menu,
     category: categories,
   });
+
 });
 
 app.get('/menu/:category', (req, res) => {
   const category = req.params.category
   const menuItems =  RESTAURANT.menu.filter((items) => items.category === category)
-  console.log(category);
+
 
   res.render('category.ejs', {
     menuItems: menuItems,
-    name: category.charAt(0).toUpperCase() + category.slice(1)
+    name:  category.charAt(0).toUpperCase() + category.slice(1)
   });
 
 });

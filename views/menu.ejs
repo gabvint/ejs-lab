@@ -14,8 +14,10 @@
     <h2><%= category[index] %></h2>
     <% menu.forEach((item, idx) => { %>
         <% if (category[index] === item.category) { %>
-            <li>
-                <%= item.id %> : <%= item.name %>
+            
+          
+          <li>
+                <%= item.id %> : <%= item.rating === 5 ? item.name + ' ⭐️' : item.name %>
                 <ul>
                     
                     <p>price: <%= item.price %></p>
