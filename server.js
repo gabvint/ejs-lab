@@ -51,8 +51,13 @@ const RESTAURANT = {
     ]
   }
   
-
-
+  let categories = []
+  // adding the categories to categories array to prevent duplicates
+  for (let i = 0; i < RESTAURANT.menu.length; i++){
+    if (!categories.includes(RESTAURANT.menu[i].category)){
+      categories.push(RESTAURANT.menu[i].category)
+    }
+  }
 
 app.get('/', (req, res) => {
   res.render('home.ejs', {
@@ -62,14 +67,6 @@ app.get('/', (req, res) => {
 
 app.get('/menu', (req, res) => {
   
-  let categories = []
-
-  // adding the categories to categories array to prevent duplicates
-  for (let i = 0; i < RESTAURANT.menu.length; i++){
-    if (!categories.includes(RESTAURANT.menu[i].category)){
-      categories.push(RESTAURANT.menu[i].category)
-    }
-  }
 
   res.render('menu.ejs', {
     restaurant: RESTAURANT,
@@ -77,6 +74,20 @@ app.get('/menu', (req, res) => {
     category: categories,
   });
 });
-app.listen(3000);
 
+app.get('/menu/:category', (req, res) => {
+  const category = req.params.category
+  const menuItems =  RESTAURANT.menu.filter((items) => items.category === category)
+  console.log(category);
+
+  res.render('category.ejs', {
+    menuItems: menuItems,
+    name: category.charAt(0).toUpperCase() + category.slice(1)
+  });
+
+});
+
+app.listen(3000, () => {
+  console.log('listening on port 3000');
+});
 
